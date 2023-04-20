@@ -2,6 +2,7 @@
 body {
   font: 30px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  
 }
 
 ol,
@@ -13,6 +14,7 @@ ul {
   clear: both;
   content: "";
   display: table;
+  
 }
 
 .status {
@@ -48,4 +50,5 @@ ul {
   margin-left: 20px;
   color: rgb(213, 42, 3);
 }
+
 
