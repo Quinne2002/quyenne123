@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import Board from "./Board";
 import "./index.css";
 
@@ -73,7 +72,7 @@ export default function App() {
   return (
     <div className="game">
       <div className="game-board">
-        <div className="Start">Start</div>
+        <div>Start</div>
         <div>{status}</div>
         <Board squares={squares} onClick={i => handleClick(i)} />
       </div>
