@@ -1,7 +1,7 @@
 
 body {
-  font: 30px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+  font: 30px "";
+  margin: 30px;
   
 }
 
@@ -18,12 +18,12 @@ ul {
 }
 
 .status {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .square {
-  background: #9ad8f0;
-  border: 1px solid #999;
+  background: white;
+  border: 1.5px solid black;
   float: left;
   font-size: 40px;
   font-weight: bold;
@@ -36,19 +36,26 @@ ul {
   width: 50px;
 }
 
-.square:focus {
-  outline: none;
-}
 
 
 .game {
-  display: flex;
-  flex-direction: row;
+  width: fit-content;
+  margin: auto;
 }
 
 .game-info {
-  margin-left: 20px;
-  color: rgb(213, 42, 3);
+  color: rgb(106, 43, 242);
+}
+button {
+  background-color: white;
+  color: black;
 }
 
-
+button.active {
+  background-color: rgb(22, 172, 222);
+  margin-right:5% ;
+}
+button.reset{
+  background-color: rgb(247, 139, 158);
+  margin-left: 20%  
+}

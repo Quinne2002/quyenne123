@@ -7,6 +7,7 @@ export default function App() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [gameMode, setGameMode] = useState('player');
+  // const [gameModeMess, setGameModeMess] = useState('');
 
   useEffect(() => {
     if (gameMode === 'computer' && !xIsNext) {
@@ -15,12 +16,18 @@ export default function App() {
       }, 500);
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [xIsNext, gameMode]);
 
   const handleGameModeChange = (m) => {
     setGameMode(m);
     setSquares(Array(9).fill(null));
     setXIsNext(true);
+    // if (m === 'player') {
+    //   setGameModeMess('Player vs Player');
+    // } else {
+    //   setGameModeMess('Player vs Computer');
+    // }
   };
 
   const handleComputerMove = () => {
@@ -47,6 +54,7 @@ export default function App() {
   const handleReset = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
+    // setGameModeMess('');
   };
 
 
@@ -65,27 +73,27 @@ export default function App() {
   return (
     <div className="game">
       <div className="game-board">
+        <div className="Start">Start</div>
+        <div>{status}</div>
         <Board squares={squares} onClick={i => handleClick(i)} />
       </div>
       <div className="game-info">
-        <div>{status}</div>
+        {/* <div>{gameModeMess}</div> */}
+        <div>
+          <button
+            className={gameMode === "player" ? "active" : ""}
+            onClick={() => handleGameModeChange("player")}
+          >Human
+          </button>
+          <button
+            className={gameMode === "computer" ? "active" : ""}
+            onClick={() => handleGameModeChange("computer")}
+          >Computer
+          </button>
+        </div>
         <button className="reset" onClick={handleReset}>Reset</button>
-         <div>
-        <button
-          className={gameMode === "player" ? "active" : ""}
-          onClick={() => handleGameModeChange("player")}
-        >
-          Player vs. Player
-        </button>
-        <button
-          className={gameMode === "computer" ? "active" : ""}
-          onClick={() => handleGameModeChange("computer")}
-        >
-          Player vs. Computer
-        </button>
       </div>
-      </div>
-     
+
 
     </div>
   );
