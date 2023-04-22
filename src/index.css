@@ -5,10 +5,6 @@ body {
   
 }
 
-ol,
-ul {
-  padding-left: 50px;
-}
 
 .board-row:after {
   clear: both;
@@ -43,19 +39,23 @@ ul {
   margin: auto;
 }
 
+
 .game-info {
   color: rgb(106, 43, 242);
-}
-button {
-  background-color: white;
-  color: black;
 }
 
 button.active {
   background-color: rgb(22, 172, 222);
   margin-right:5% ;
+  margin-left: 5%;
 }
 button.reset{
   background-color: rgb(247, 139, 158);
   margin-left: 20%  
+}
+
+.options{
+  display: flex;
+  justify-content: space-between;
+  width: 148px;
 }

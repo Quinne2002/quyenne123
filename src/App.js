@@ -72,7 +72,6 @@ export default function App() {
   return (
     <div className="game">
       <div className="game-board">
-        <div>Start</div>
         <div>{status}</div>
         <Board squares={squares} onClick={i => handleClick(i)} />
       </div>

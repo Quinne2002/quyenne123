@@ -11,7 +11,7 @@ export default function Board({ squares, onClick }) {
   };
 
   return (
-    <div>
+    <div className="options">
       <div className="board-row">{renderSquares([0, 1, 2])}</div>
       <div className="board-row">{renderSquares([3, 4, 5])}</div>
       <div className="board-row">{renderSquares([6, 7, 8])}</div>
