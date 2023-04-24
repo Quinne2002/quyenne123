@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Board from "./Board";
 import "./index.css";
 
@@ -7,16 +7,6 @@ export default function App() {
   const [xIsNext, setXIsNext] = useState(true);
   const [gameMode, setGameMode] = useState('player');
   // const [gameModeMess, setGameModeMess] = useState('');
-
-  useEffect(() => {
-    if (gameMode === 'computer' && !xIsNext) {
-      const timer = setTimeout(() => {
-        handleComputerMove();
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [xIsNext, gameMode]);
 
   const handleGameModeChange = (m) => {
     setGameMode(m);
@@ -29,34 +19,38 @@ export default function App() {
     // }
   };
 
-  const handleComputerMove = () => {
-    const emptySquares = squares.reduce(
-      (acc, value, index) => (value == null ? [...acc, index] : acc),
-      []
-    );
-    const randomIndex = Math.floor(Math.random() * emptySquares.length);
-    const computerMove = emptySquares[randomIndex];
-    const newSquares = [...squares];
-    newSquares[computerMove] = "O";
-    setSquares(newSquares);
-    setXIsNext(true);
-  };
-
   const handleClick = (i) => {
     if (checkWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = xIsNext ? "X" : "O";
-    setSquares(squares);
+    const newSquares = [...squares];
+    newSquares[i] = xIsNext ? "X" : "O";
+    setSquares(newSquares);
+    if (checkWinner(newSquares)) {
+      return;
+    }
     setXIsNext(!xIsNext);
+    if (gameMode === 'computer') {
+      const emptySquares = newSquares.reduce(
+        (acc, value, index) => (value == null ? [...acc, index] : acc),
+        []
+      );
+      const randomIndex = Math.floor(Math.random() * emptySquares.length);
+      const computerMove = emptySquares[randomIndex];
+      newSquares[computerMove] = "O";
+      setSquares(newSquares);
+      if (checkWinner(newSquares)) {
+        return;
+      }
+      setXIsNext(true);
+    }
   };
+
   const handleReset = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     // setGameModeMess('');
   };
-
-
 
   const winner = checkWinner(squares);
 
@@ -91,8 +85,6 @@ export default function App() {
         </div>
         <button className="reset" onClick={handleReset}>Reset</button>
       </div>
-
-
     </div>
   );
 
@@ -114,7 +106,5 @@ export default function App() {
     }
     return null;
   }
-
-
 }
 
