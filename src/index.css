@@ -63,9 +63,20 @@ body {
 }
 
 .button:active {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 22px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
   background-color: rgb(177, 123, 177);
-  box-shadow: 0 3px #d2cfcf;
-  transform: translateY(4px);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px #e4e2e2;
+  margin-right: 5px;
+  
 }
 .status{
   color: rgb(30, 7, 13);

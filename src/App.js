@@ -7,12 +7,21 @@ export default function App() {
   const [xIsNext, setXIsNext] = useState(true);
   const [gameMode, setGameMode] = useState('player');
   const [showImage, setShowImage] = useState(false);
+  const [buttonColor, setButtonColor] = useState(" rgb(177, 123, 177)");
+  const [buttonColorcom, setButtonColorcom] = useState(" rgb(177, 123, 177)");
+
 
   const handleGameModeChange = (m) => {
     setGameMode(m);
     setSquares(Array(9).fill(null));
     setXIsNext(true);
+    if (m === "player") {
+      setButtonColor("green");
+    } else if (m === "computer") {
+      setButtonColorcom("blue");
+    }
   };
+
 
   const handleClick = (i) => {
     if (checkWinner(squares) || squares[i]) {
@@ -47,6 +56,9 @@ export default function App() {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     setShowImage(null);
+    setButtonColor(null);
+    setButtonColorcom(null);
+
   };
 
   const winner = checkWinner(squares);
@@ -56,6 +68,8 @@ export default function App() {
     status = "Winner: " + winner;
   } else if (squares.every((square) => square != null)) {
     status = "Draw";
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -63,12 +77,26 @@ export default function App() {
       <div className="center">
         <Board squares={squares} onClick={i => handleClick(i)} />
       </div>
-      <div>
-        <button className="button" onClick={() => handleGameModeChange("player")}>Human</button>
-        <button className="button" onClick={() => handleGameModeChange("computer")}>Computer</button>
-        <button className="button" onClick={handleReset}>Reset</button>
-      </div>
-      
+
+      <button
+        className="button"
+        style={{ backgroundColor: buttonColor }}
+        onClick={() => handleGameModeChange("player")}
+      >
+        Human
+      </button>
+      <button
+        className="button"
+        style={{ backgroundColor: buttonColorcom }}
+        onClick={() => handleGameModeChange("computer")}
+      >
+        Computer
+      </button>
+      <button className="button" onClick={handleReset}>
+        Reset
+      </button>
+
+
       <div className="status">{status}</div>
       {showImage && <img src={process.env.PUBLIC_URL + "/vui.png"} alt="win" style={{ maxWidth: "300px" }} />}
     </div>
