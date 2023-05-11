@@ -68,11 +68,9 @@ export default function App() {
         <button className="button" onClick={() => handleGameModeChange("computer")}>Computer</button>
         <button className="button" onClick={handleReset}>Reset</button>
       </div>
-      <div>{status}</div>
-      {showImage && <img src={process.env.PUBLIC_URL + "/vui.png"} alt="win" />}
-   
-
-
+      
+      <div className="status">{status}</div>
+      {showImage && <img src={process.env.PUBLIC_URL + "/vui.png"} alt="win" style={{ maxWidth: "300px" }} />}
     </div>
 
 

@@ -3,13 +3,13 @@ import Square from "./square";
 import "./Board.js";
 import "./index.css";
 
-export default function Board({ squares, onClick }) {
+export default function Board({ squares, onClick}) {
   const renderSquares = numbs => {
     return numbs.map(num => (
-      <Square key= {num} value={squares[num]} onClick={() => onClick(num)} />
+      <Square key= {num} value={squares[num]} onClick={() => onClick(num)}/>
     ));
   };
-
+ 
   return (
     <div>
       <div className="board-row">{renderSquares([0, 1, 2])}</div>
