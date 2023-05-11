@@ -6,17 +6,12 @@ export default function App() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [gameMode, setGameMode] = useState('player');
-  // const [gameModeMess, setGameModeMess] = useState('');
+  const [showImage, setShowImage] = useState(false);
 
   const handleGameModeChange = (m) => {
     setGameMode(m);
     setSquares(Array(9).fill(null));
     setXIsNext(true);
-    // if (m === 'player') {
-    //   setGameModeMess('Player vs Player');
-    // } else {
-    //   setGameModeMess('Player vs Computer');
-    // }
   };
 
   const handleClick = (i) => {
@@ -27,6 +22,7 @@ export default function App() {
     newSquares[i] = xIsNext ? "X" : "O";
     setSquares(newSquares);
     if (checkWinner(newSquares)) {
+      setShowImage(true);
       return;
     }
     setXIsNext(!xIsNext);
@@ -40,6 +36,7 @@ export default function App() {
       newSquares[computerMove] = "O";
       setSquares(newSquares);
       if (checkWinner(newSquares)) {
+        setShowImage(true);
         return;
       }
       setXIsNext(true);
@@ -49,7 +46,7 @@ export default function App() {
   const handleReset = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
-    // setGameModeMess('');
+    setShowImage(null);
   };
 
   const winner = checkWinner(squares);
@@ -59,33 +56,26 @@ export default function App() {
     status = "Winner: " + winner;
   } else if (squares.every((square) => square != null)) {
     status = "Draw";
-  } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
     <div className="game">
-      <div className="game-board">
-        <div>{status}</div>
+      <div className="center">
         <Board squares={squares} onClick={i => handleClick(i)} />
       </div>
-      <div className="game-info">
-        {/* <div>{gameModeMess}</div> */}
-        <div>
-          <button
-            className={gameMode === "player" ? "active" : ""}
-            onClick={() => handleGameModeChange("player")}
-          >Human
-          </button>
-          <button
-            className={gameMode === "computer" ? "active" : ""}
-            onClick={() => handleGameModeChange("computer")}
-          >Computer
-          </button>
-        </div>
-        <button className="reset" onClick={handleReset}>Reset</button>
+      <div>
+        <button className="button" onClick={() => handleGameModeChange("player")}>Human</button>
+        <button className="button" onClick={() => handleGameModeChange("computer")}>Computer</button>
+        <button className="button" onClick={handleReset}>Reset</button>
       </div>
+      <div>{status}</div>
+      {showImage && <img src={process.env.PUBLIC_URL + "/vui.png"} alt="win" />}
+   
+
+
     </div>
+
+
   );
 
   function checkWinner(squares) {
@@ -107,4 +97,6 @@ export default function App() {
     return null;
   }
 }
+
+
 
