@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Board from "./Board";
 import "./index.css";
 
@@ -10,19 +10,22 @@ export default function App() {
   const [buttonColor, setButtonColor] = useState(" rgb(177, 123, 177)");
   const [buttonColorcom, setButtonColorcom] = useState(" rgb(177, 123, 177)");
 
+  useEffect(() => {
+    if (gameMode === "player") {
+      setButtonColor("green");
+      setButtonColorcom("rgb(177, 123, 177)");
+    } else if (gameMode === "computer") {
+      setButtonColorcom("blue");
+      setButtonColor("rgb(177, 123, 177)");
+    }
+  }, [gameMode]);
 
   const handleGameModeChange = (m) => {
     setGameMode(m);
     setSquares(Array(9).fill(null));
     setXIsNext(true);
-    if (m === "player") {
-      setButtonColor("green");
-    } else if (m === "computer") {
-      setButtonColorcom("blue");
-    }
   };
-
-
+  
   const handleClick = (i) => {
     if (checkWinner(squares) || squares[i]) {
       return;
