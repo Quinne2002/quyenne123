@@ -5,7 +5,7 @@ import "./index.css";
 export default function App() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
-  const [gameMode, setGameMode] = useState('player');
+  const [gameMode, setGameMode] = useState(null);
   const [showImage, setShowImage] = useState(false);
   const [buttonColor, setButtonColor] = useState(" rgb(177, 123, 177)");
   const [buttonColorcom, setButtonColorcom] = useState(" rgb(177, 123, 177)");
@@ -23,7 +23,7 @@ export default function App() {
   const handleGameModeChange = (m) => {
     setGameMode(m);
     setSquares(Array(9).fill(null));
-    setXIsNext(true);
+    setXIsNext(true); 
   };
   
   const handleClick = (i) => {
@@ -55,13 +55,10 @@ export default function App() {
     }
   };
 
-  const handleReset = () => {
+  const handleReset = (m) => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     setShowImage(null);
-    setButtonColor(null);
-    setButtonColorcom(null);
-
   };
 
   const winner = checkWinner(squares);
