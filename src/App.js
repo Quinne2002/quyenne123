@@ -5,7 +5,7 @@ import "./index.css";
 export default function App() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
-  const [gameMode, setGameMode] = useState(null);
+  const [gameMode, setGameMode] = useState("player");
   const [showImage, setShowImage] = useState(false);
   const [buttonColor, setButtonColor] = useState(" rgb(177, 123, 177)");
   const [buttonColorcom, setButtonColorcom] = useState(" rgb(177, 123, 177)");
@@ -55,7 +55,7 @@ export default function App() {
     }
   };
 
-  const handleReset = (m) => {
+  const handleReset = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     setShowImage(null);
