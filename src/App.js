@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Board from "./Board";
 import "./index.css";
 
@@ -9,6 +9,7 @@ export default function App() {
   const [showImage, setShowImage] = useState(false);
   const [buttonColor, setButtonColor] = useState(" rgb(177, 123, 177)");
   const [buttonColorcom, setButtonColorcom] = useState(" rgb(177, 123, 177)");
+  const [gameResult, setGameResult] = useState(null);
 
   useEffect(() => {
     if (gameMode === "player") {
@@ -23,9 +24,12 @@ export default function App() {
   const handleGameModeChange = (m) => {
     setGameMode(m);
     setSquares(Array(9).fill(null));
-    setXIsNext(true); 
+    setXIsNext(true);
+    setShowImage(false);
+    setGameResult(null);
+    
   };
-  
+
   const handleClick = (i) => {
     if (checkWinner(squares) || squares[i]) {
       return;
@@ -35,6 +39,7 @@ export default function App() {
     setSquares(newSquares);
     if (checkWinner(newSquares)) {
       setShowImage(true);
+      setGameResult(xIsNext ? "player" : "computer");
       return;
     }
     setXIsNext(!xIsNext);
@@ -49,6 +54,7 @@ export default function App() {
       setSquares(newSquares);
       if (checkWinner(newSquares)) {
         setShowImage(true);
+        setGameResult("computer");
         return;
       }
       setXIsNext(true);
@@ -59,13 +65,19 @@ export default function App() {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     setShowImage(null);
+    setGameResult("computer");
   };
 
   const winner = checkWinner(squares);
 
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    if (gameMode === "player"){ 
+      status = "Winner: " + winner; 
+  }else if (gameMode === "computer") {
+    status = gameResult === "player" ? "Winner: player" : gameResult === "computer" ? "Winner: computer" : "Draw";
+  }
+
   } else if (squares.every((square) => square != null)) {
     status = "Draw";
   } else {
